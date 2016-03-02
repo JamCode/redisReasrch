@@ -46,7 +46,7 @@ function loadEntityBase(){
                     });
                 })
                 .on('end', function() {
-                    // all rows have been received
+                    console.log('load entity base end');
                 }
             );
         }
