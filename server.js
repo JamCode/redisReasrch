@@ -15,6 +15,7 @@ operation.loadEntity(function(flag, result){
                 console.log(err);
             }else{
                 result.forEach(function(e){
+                    console.log(e.ema_enty_srno);
                     client.hset(entyBaseHash, e.ema_enty_srno, e.ema_enty_enty_code, function(err, reply){
                         if(err){
                             console.log(err);
