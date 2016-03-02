@@ -20,8 +20,9 @@ client.hkeys(entyBaseHash, function(err, reply){
         entySrnoArr = reply;
 
         setInterval(function(){
-            console.log('send 100req/s for enty base info');
-            for(var i = 0; i<1000; ++i){
+            var packCount = 1000;
+            console.log('send '+ packCount + 'req/s for enty base info');
+            for(var i = 0; i<packCount; ++i){
                 var index = parseInt(Math.random()*entySrnoArr.length, 10);
                 client.hget(entyBaseHash, entySrnoArr[index], function(err, reply){
                     if(err){
