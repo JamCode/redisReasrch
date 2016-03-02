@@ -19,11 +19,14 @@ operation.loadEntityAccount(function(flag, result){
             }else{
                 var resultHash = {};
                 result.forEach(function(e){
-                    if (resultHash[e.EAD_ENTY_SRNO] == null) {
+                    if (resultHash[e.EAD_ENTY_SRNO] === null) {
                         resultHash[e.EAD_ENTY_SRNO] = [];
                     }
                     resultHash[e.EAD_ENTY_SRNO].push(e);
                 });
+
+                console.log('resultHash: ' + Object.keys(resultHash).length);
+                
 
                 for (var entySrno in resultHash) {
                     client.hset(entyAccntHash, entySrno, JSON.stringify(resultHash[entySrno]), function(err, reply){
@@ -47,12 +50,9 @@ operation.loadEntityBase(function(flag, result){
                 console.log(err);
             }else{
                 result.forEach(function(e){
-                    console.log(e.EMA_ENTY_SRNO);
                     client.hset(entyBaseHash, e.EMA_ENTY_SRNO, JSON.stringify(e), function(err, reply){
                         if(err){
                             console.log(err);
-                        }else{
-                            console.log(reply);
                         }
                     });
                 });
