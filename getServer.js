@@ -18,7 +18,7 @@ client.hkeys(entyBaseHash, function(err, reply){
     }else{
         console.log(reply.length);
         entySrnoArr = reply;
-        var milSec = 500;
+        var milSec = 250;
         setInterval(function(){
             var packCount = 5000;
 
