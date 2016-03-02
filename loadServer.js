@@ -25,7 +25,7 @@ operation.loadEntityAccount(function(flag, result){
                 //     resultHash[e.EAD_ENTY_SRNO].push(e);
                 // });
 
-                console.log('resultHash: ' + Object.keys(resultHash).length);
+                // console.log('resultHash: ' + Object.keys(resultHash).length);
 
                 // for (var entySrno in resultHash) {
                 //     client.hset(entyAccntHash, entySrno, JSON.stringify(resultHash[entySrno]), function(err, reply){
