@@ -8,6 +8,6 @@ exports.loadEntityBase = function(callback){
 
 
 exports.loadEntityAccount = function(callback){
-    var sql = 'select *from trdx_entity_accnt_dtls';
+    var sql = 'select *from trdx_entity_accnt_dtls where ead_accnt_status_indc = 1';
     conn.executeSql(sql, [], callback);
 }

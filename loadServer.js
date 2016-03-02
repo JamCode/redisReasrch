@@ -17,33 +17,26 @@ operation.loadEntityAccount(function(flag, result){
             if (err) {
                 console.log(err);
             }else{
+                var resultHash = {};
                 result.forEach(function(e){
-                    client.hget(entyAccntHash, e.EAD_ENTY_SRNO, function(err, reply){
+                    if (resultHash[e.EAD_ENTY_SRNO] == null) {
+                        resultHash[e.EAD_ENTY_SRNO] = [];
+                    }
+                    resultHash[e.EAD_ENTY_SRNO].push(e);
+                });
+
+                console.log('resultHash: ' + Object.keys(resultHash).length);
+
+                for (var entySrno in resultHash) {
+                    client.hset(entyAccntHash, entySrno, JSON.stringify(resultHash[entySrno]), function(err, reply){
                         if(err){
                             console.log(err);
-                        }else{
-                            if(reply == null){
-                                client.hset(entyAccntHash,
-                                    e.EAD_ENTY_SRNO, JSON.stringify([e]), function(err, reply){
-                                        if(err){
-                                            console.log(err);
-                                        }
-                                    });
-                            }else{
-                                var arr = JSON.parse(reply);
-                                arr.push(e);
-                                client.hset(entyAccntHash,
-                                    e.EAD_ENTY_SRNO, JSON.stringify(arr), function(err, reply){
-                                        if(err){
-                                            console.log(err);
-                                        }
-                                    });
-                            }
                         }
                     });
-                });
+                }
             }
         });
+
     }else{
         console.log(result);
     }
