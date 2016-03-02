@@ -15,7 +15,13 @@ operation.loadEntity(function(flag, result){
                 console.log(err);
             }else{
                 result.forEach(function(e){
-                    client.hset(entyBaseHash, e.ema_enty_srno, e, redis.print);
+                    client.hset(entyBaseHash, e.ema_enty_srno, e.ema_enty_enty_code, function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log(reply);
+                        }
+                    });
                 });
             }
         });
