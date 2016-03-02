@@ -21,6 +21,7 @@ loadEntityBase();
 
 
 function loadEntityBase(){
+    console.log('start load entity base');
     client.del(entyBaseHash, function(err, reply){
         if(err){
             console.log(err);
