@@ -26,8 +26,6 @@ client.hkeys(entyBaseHash, function(err, reply){
                 client.hget(entyBaseHash, entySrnoArr[index], function(err, reply){
                     if(err){
                         console.log(err);
-                    }else{
-                        console.log(reply);
                     }
                 });
             }
