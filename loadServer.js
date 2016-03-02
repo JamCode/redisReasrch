@@ -18,7 +18,7 @@ connection.connect();
 var entyBaseHash = config.hash.entyBaseHash;
 var entyAccntHash = config.hash.entyAccntHash;
 loadEntityBase();
-
+loadEntityAccnt();
 
 
 
