@@ -11,27 +11,6 @@ var pool = mysql.createPool({
 
 console.log('load utility');
 
-exports.getPlusMinus = function(num){
-	if (num>0) {
-		return 1;
-	}else if (num == 0) {
-		return 0
-	}else{
-		return -1
-	}
-}
-
-
-exports.compareDay = function(a, b){
-	var a1 = a.split('-');
-	var b1 = b.split('-');
-	var d1 = new Date(a1[0], a1[1], a1[2]);
-	var d2 = new Date(b1[0], b1[1], b1[2]);
-	//console.log(d1.toString());
-	//console.log(d2.toString());
-	//console.log(Date.parse(d1) - Date.parse(d2));
-	return Date.parse(d1) - Date.parse(d2);
-}
 
 exports.endPool = function(callback){
 	pool.end(function(err){
@@ -39,20 +18,7 @@ exports.endPool = function(callback){
 	});
 }
 
-exports.isMarketOpenTime = function() {
-	var now = new Date();
-	var day = now.getDay();
-	if (day == 6 || day == 7) {
-		return false;
-	}
 
-	var hour = now.getHours();
-	var min = now.getMinutes();
-	if (hour < 9 || hour > 15 || (hour == 9 && min < 30) || (hour == 15 && min > 0)) {
-		return false;
-	}
-	return true;
-}
 
 
 exports.sha1Cryp = function(str){
