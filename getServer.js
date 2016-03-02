@@ -21,7 +21,8 @@ client.hkeys(entyBaseHash, function(err, reply){
 
         setInterval(function(){
             var packCount = 5000;
-            console.log('send '+ packCount + 'req/s for enty base info');
+            var milSec = 500;
+            console.log('send '+ packCount*1000/milSec + 'req/s for enty base info');
             for(var i = 0; i<packCount; ++i){
                 var index = parseInt(Math.random()*entySrnoArr.length, 10);
                 client.hget(entyBaseHash, entySrnoArr[index], function(err, reply){
@@ -31,6 +32,6 @@ client.hkeys(entyBaseHash, function(err, reply){
                 });
             }
 
-        }, 1000);
+        }, milSec);
     }
 });
