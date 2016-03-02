@@ -17,13 +17,13 @@ operation.loadEntityAccount(function(flag, result){
             if (err) {
                 console.log(err);
             }else{
-                var resultHash = {};
-                result.forEach(function(e){
-                    if (resultHash[e.EAD_ENTY_SRNO] == null) {
-                        resultHash[e.EAD_ENTY_SRNO] = [];
-                    }
-                    resultHash[e.EAD_ENTY_SRNO].push(e);
-                });
+                // var resultHash = {};
+                // result.forEach(function(e){
+                //     if (resultHash[e.EAD_ENTY_SRNO] == null) {
+                //         resultHash[e.EAD_ENTY_SRNO] = [];
+                //     }
+                //     resultHash[e.EAD_ENTY_SRNO].push(e);
+                // });
 
                 console.log('resultHash: ' + Object.keys(resultHash).length);
 
