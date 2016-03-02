@@ -20,15 +20,18 @@ client.hkeys(entyBaseHash, function(err, reply){
         entySrnoArr = reply;
 
         setInterval(function(){
-            console.log('send 1 requests for enty base info');
-            var index = parseInt(Math.random()*entySrnoArr.length, 10);
-            client.hget(entyBaseHash, entySrnoArr[index], function(err, reply){
-                if(err){
-                    console.log(err);
-                }else{
-                    console.log(reply);
-                }
-            });
+            console.log('send 100req/s for enty base info');
+            for(var i = 0; i<100; ++i){
+                var index = parseInt(Math.random()*entySrnoArr.length, 10);
+                client.hget(entyBaseHash, entySrnoArr[index], function(err, reply){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        console.log(reply);
+                    }
+                });
+            }
+
         }, 1000);
     }
 });
