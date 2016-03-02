@@ -20,6 +20,53 @@ var entyAccntHash = config.hash.entyAccntHash;
 loadEntityBase();
 
 
+
+
+function loadEntityAccnt(){
+    console.log('start load entity accnt');
+    client.del(entyAccntHash, function(err, reply){
+        if (err) {
+            console.log(err);
+        }else{
+            var entyAccntQuery = connection.query('select *from trdx_entity_accnt_dtls where ead_accnt_status_indc = 1');
+            entyAccntQuery
+                .on('error', function(err) {
+                    console.log(err);
+                })
+                .on('fields', function(fields) {
+                    // the field packets for the rows to follow
+                })
+                .on('result', function(row) {
+                    // Pausing the connnection is useful if your processing involves I/O
+                    connection.pause();
+                    client.hget(entyAccntHash, row.EAD_ENTY_SRNO, function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            var arr = JSON.parse(reply);
+                            if(arr == null){
+                                arr = [];
+                            }
+                            arr.push(row);
+                            client.hset(entyAccntHash, row.EAD_ENTY_SRNO, JSON.stringify(arr), function(err, reply){
+                                if(err){
+                                    console.log(err);
+                                }else{
+
+                                }
+                                connection.resume();
+                            });
+                        }
+                    });
+                })
+                .on('end', function() {
+                    console.log('load entity accnt end');
+                }
+            );
+        }
+    });
+}
+
 function loadEntityBase(){
     console.log('start load entity base');
     client.del(entyBaseHash, function(err, reply){
