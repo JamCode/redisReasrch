@@ -1,5 +1,5 @@
 var operation = require('./database/operation.js');
-var redis = require("redis"),
+var redis = require("redis");
 var client = redis.createClient({auth_pass:'here_dev'});
 
 client.on("error", function (err) {
