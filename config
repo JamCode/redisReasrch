@@ -1,6 +1,10 @@
 exports.hash = {
     entyBaseHash: 'entyBaseHash',
-    entyAccntHash: 'entyAccntHash'
+    entyAccntHash: 'entyAccntHash',
+    entyElgHash: 'entyElgHash',
+    entyMktMakeHash: 'entyMktMakeHash',
+    entyMktStatusHash: 'entyMktStatusHash',
+    entyTypeDtlsHash: 'entyTypeDtlsHash'
 }
 
 exports.set = {
