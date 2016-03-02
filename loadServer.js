@@ -17,30 +17,43 @@ connection.connect();
 
 var entyBaseHash = config.hash.entyBaseHash;
 var entyAccntHash = config.hash.entyAccntHash;
+loadEntityBase();
 
-var entyBaseQuery = connection.query('select *from trdx_entity_master');
-entyBaseQuery
-    .on('error', function(err) {
-        console.log(err);
-    })
-    .on('fields', function(fields) {
-        // the field packets for the rows to follow
-    })
-    .on('result', function(row) {
-        // Pausing the connnection is useful if your processing involves I/O
-        connection.pause();
-        client.hset(entyBaseHash, row.EMA_ENTY_SRNO, JSON.stringify(row), function(err, reply){
-            if(err){
-                console.log(err);
-            }else{
 
-            }
-            connection.resume();
-        });
-    })
-    .on('end', function() {
-        // all rows have been received
+function loadEntityBase(){
+    client.del(entyBaseHash, function(err, reply){
+        if(err){
+            console.log(err);
+        }else{
+            var entyBaseQuery = connection.query('select *from trdx_entity_master');
+            entyBaseQuery
+                .on('error', function(err) {
+                    console.log(err);
+                })
+                .on('fields', function(fields) {
+                    // the field packets for the rows to follow
+                })
+                .on('result', function(row) {
+                    // Pausing the connnection is useful if your processing involves I/O
+                    connection.pause();
+                    client.hset(entyBaseHash, row.EMA_ENTY_SRNO, JSON.stringify(row), function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+
+                        }
+                        connection.resume();
+                    });
+                })
+                .on('end', function() {
+                    // all rows have been received
+                }
+            );
+        }
     });
+}
+
+
 
 // operation.loadEntityAccount(function(flag, result){
 //     if(flag){
