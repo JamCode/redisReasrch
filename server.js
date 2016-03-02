@@ -7,8 +7,39 @@ client.on("error", function (err) {
 });
 
 var entyBaseHash = 'entyBaseHash';
+var entyAccntHash = 'entyAccntHash';
 
-operation.loadEntity(function(flag, result){
+
+operation.loadEntityAccount(function(flag, result){
+    if(flag){
+        client.del(entyAccntHash, function(err, reply){
+            if (err) {
+                console.log(err);
+            }else{
+                var resultHash = {};
+                result.forEach(function(e){
+                    if (resultHash[e.EAD_ENTY_SRNO] == null) {
+                        resultHash[e.EAD_ENTY_SRNO] = [];
+                    }
+                    resultHash[e.EAD_ENTY_SRNO].push(e);
+                });
+
+                for (var entySrno in resultHash) {
+                    client.hset(entyAccntHash, entySrno, JSON.stringify(resultHash[entySrno]), function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }
+                    });
+                }
+            }
+        });
+
+    }else{
+        console.log(result);
+    }
+});
+
+operation.loadEntityBase(function(flag, result){
     if(flag){
         client.del(entyBaseHash, function(err, reply){
             if(err){

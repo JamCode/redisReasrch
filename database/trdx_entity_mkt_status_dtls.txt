@@ -1,0 +1,12 @@
+-- Create table
+create table TRDX_ENTITY_MKT_STATUS_DTLS
+(
+  EMS_ENTY_SRNO        NUMBER(6) not null,
+  EMS_MKT_SRNO         NUMBER(6) not null,
+  EMS_TRDNG_MTHD_SRNO  NUMBER(6) not null,
+  EMS_ENTY_STATUS_INDC NUMBER(4) not null,
+  EMS_CRTD_USER_ID     VARCHAR2(60) not null,
+  EMS_CRTD_DATE        DATE not null,
+  EMS_UPDTD_USER_ID    VARCHAR2(60) not null,
+  EMS_UPDTD_DATE       DATE not null
+)

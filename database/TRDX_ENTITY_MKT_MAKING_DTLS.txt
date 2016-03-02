@@ -1,0 +1,16 @@
+-- Create table
+create table TRDX_ENTITY_MKT_MAKING_DTLS
+(
+  EMM_ENTY_SRNO              NUMBER(6) not null,
+  EMM_MKT_SRNO               NUMBER(6) not null,
+  EMM_TRDNG_MTHD_SRNO        NUMBER(6) not null,
+  EMM_RCRD_SRNO              NUMBER(6) not null,
+  EMM_MKT_MAKING_TYPE_INDC   NUMBER(4) not null,
+  EMM_ELGBLT_FROM_DATE       DATE not null,
+  EMM_ELGBLT_TO_DATE         DATE not null,
+  EMM_MKT_MAKING_STATUS_INDC NUMBER(4) not null,
+  EMM_CRTD_USER_ID           VARCHAR2(60) not null,
+  EMM_CRTD_DATE              DATE not null,
+  EMM_UPDTD_USER_ID          VARCHAR2(60) not null,
+  EMM_UPDTD_DATE             DATE not null
+)

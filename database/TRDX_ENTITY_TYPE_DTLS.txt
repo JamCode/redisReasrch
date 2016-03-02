@@ -1,0 +1,12 @@
+create table TRDX_ENTITY_TYPE_DTLS
+(
+  EYD_ENTY_SRNO          NUMBER(6) not null,
+  EYD_MKT_SRNO           NUMBER(6) not null,
+  EYD_TRDNG_MTHD_SRNO    NUMBER(6) not null,
+  EYD_ENTY_TYPE_INDC     NUMBER(4) not null,
+  EYD_ENTY_SUB_TYPE_INDC NUMBER(4) not null,
+  EYD_CRTD_USER_ID       VARCHAR2(60) not null,
+  EYD_CRTD_DATE          DATE not null,
+  EYD_UPDTD_USER_ID      VARCHAR2(60) not null,
+  EYD_UPDTD_DATE         DATE not null
+)
