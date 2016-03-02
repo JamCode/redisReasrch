@@ -18,10 +18,10 @@ client.hkeys(entyBaseHash, function(err, reply){
     }else{
         console.log(reply.length);
         entySrnoArr = reply;
-
+        var milSec = 500;
         setInterval(function(){
             var packCount = 5000;
-            var milSec = 500;
+
             console.log('send '+ packCount*1000/milSec + 'req/s for enty base info');
             for(var i = 0; i<packCount; ++i){
                 var index = parseInt(Math.random()*entySrnoArr.length, 10);
