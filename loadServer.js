@@ -29,8 +29,14 @@ entyBaseQuery
     .on('result', function(row) {
         // Pausing the connnection is useful if your processing involves I/O
         connection.pause();
-        console.log(row);
-        connnection.resume();
+        client.hset(entyBaseHash, row.EMA_ENTY_SRNO, JSON.stringify(row), function(err, reply){
+            if(err){
+                console.log(err);
+            }else{
+
+            }
+            connnection.resume();
+        });
         // processRow(row, function() {
         //   connection.resume();
         // });
