@@ -1,0 +1,8 @@
+exports.hash = {
+    entyBaseHash: 'entyBaseHash',
+    entyAccntHash: 'entyAccntHash'
+}
+
+exports.set = {
+
+}

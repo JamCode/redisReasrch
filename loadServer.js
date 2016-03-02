@@ -1,13 +1,14 @@
 var operation = require('./database/operation.js');
 var redis = require("redis");
 var client = redis.createClient({auth_pass:'here_dev'});
+var config = require('./config');
 
 client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-var entyBaseHash = 'entyBaseHash';
-var entyAccntHash = 'entyAccntHash';
+var entyBaseHash = config.hash.entyBaseHash;
+var entyAccntHash = config.hash.entyAccntHash;
 
 
 operation.loadEntityAccount(function(flag, result){
