@@ -29,6 +29,6 @@ client.hkeys(entyBaseHash, function(err, reply){
                     console.log(reply);
                 }
             });
-        }, 1);
+        }, 1000);
     }
 });
