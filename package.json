@@ -1,0 +1,23 @@
+{
+  "name": "jam",
+  "version": "1.0.0",
+  "description": "redis test",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamCode/redisReasrch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamCode/redisReasrch/issues"
+  },
+  "homepage": "https://github.com/JamCode/redisReasrch#readme",
+  "dependencies": {
+    "mysql": "^2.10.2"
+  }
+}
