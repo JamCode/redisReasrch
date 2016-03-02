@@ -35,11 +35,8 @@ entyBaseQuery
             }else{
 
             }
-            connnection.resume();
+            connection.resume();
         });
-        // processRow(row, function() {
-        //   connection.resume();
-        // });
     })
     .on('end', function() {
         // all rows have been received
