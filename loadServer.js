@@ -37,9 +37,9 @@ async.series([
     function(callback){
         loadEntityMktMaking(callback);
     },
-    function(callback){
-        loadUserDtls(callback);
-    }
+    // function(callback){
+    //     loadUserDtls(callback);
+    // }
 ],
 function(err, results){
     // results is now equal to ['one', 'two']
