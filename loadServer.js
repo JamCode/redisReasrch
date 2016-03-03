@@ -36,6 +36,9 @@ async.series([
     },
     function(callback){
         loadEntityMktMaking(callback);
+    },
+    function(callback){
+        loadUserDtls(callback);
     }
 ],
 function(err, results){
@@ -48,6 +51,38 @@ function(err, results){
 // loadEntityBase();
 // loadEntityAccnt();
 // loadEntityElg();
+
+function loadUserDtls(endCallback){
+    console.log('start load user dtls');
+    client.del(config.hash.userDtlsHash, function(err, reply){
+        if(err){
+            console.log(err);
+        }else{
+            var query = connection.query('select *from trdx_user_dtls');
+            query
+                .on('error', function(err) {
+                    console.log(err);
+                })
+                .on('result', function(row) {
+                    // Pausing the connnection is useful if your processing involves I/O
+                    connection.pause();
+                    client.hset(config.hash.userDtlsHash, row.UDT_USER_SRNO, JSON.stringify(row), function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            //console.log(row.EMA_ENTY_SRNO);
+                        }
+                        connection.resume();
+                    });
+                })
+                .on('end', function() {
+                    console.log('load user dtls end');
+                    endCallback(null);
+                }
+            );
+        }
+    });
+}
 
 function loadEntityMktMaking(endCallback){
     console.log('start load entity mkt making dtls');

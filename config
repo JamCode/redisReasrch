@@ -4,7 +4,9 @@ exports.hash = {
     entyElgHash: 'entyElgHash',
     entyMktMakeHash: 'entyMktMakeHash',
     entyMktStatusHash: 'entyMktStatusHash',
-    entyTypeDtlsHash: 'entyTypeDtlsHash'
+    entyTypeDtlsHash: 'entyTypeDtlsHash',
+
+    userDtlsHash: 'userDtlsHash'
 }
 
 exports.set = {
