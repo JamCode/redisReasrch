@@ -19,8 +19,50 @@ var entyBaseHash = config.hash.entyBaseHash;
 var entyAccntHash = config.hash.entyAccntHash;
 loadEntityBase();
 loadEntityAccnt();
+loadEntityElg();
 
 
+function loadEntityElg(){
+    console.log('start load entity elg');
+    client.del(config.hash.entyElgHash, function(err, reply){
+        if(err){
+            console.log(err);
+        }else{
+            var query = connection.query('select *from trdx_entity_elgblt_dtls where eed_enty_elgblt_status_indc = 1');
+            query
+                .on('error', function(err) {
+                    console.log(err);
+                })
+                .on('result', function(row) {
+                    // Pausing the connnection is useful if your processing involves I/O
+                    connection.pause();
+                    client.hget(config.hash.entyElgHash, row.EED_ENTY_SRNO, function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            var arr = JSON.parse(reply);
+                            if(arr == null){
+                                arr = [];
+                            }
+                            arr.push(row);
+                            client.hset(config.hash.entyElgHash, row.EED_ENTY_SRNO, JSON.stringify(arr), function(err, reply){
+                                if(err){
+                                    console.log(err);
+                                }else{
+
+                                }
+                                connection.resume();
+                            });
+                        }
+                    });
+                })
+                .on('end', function() {
+                    console.log('load entity elg end');
+                }
+            );
+        }
+    });
+}
 
 function loadEntityAccnt(){
     console.log('start load entity accnt');
@@ -32,9 +74,6 @@ function loadEntityAccnt(){
             entyAccntQuery
                 .on('error', function(err) {
                     console.log(err);
-                })
-                .on('fields', function(fields) {
-                    // the field packets for the rows to follow
                 })
                 .on('result', function(row) {
                     // Pausing the connnection is useful if your processing involves I/O
@@ -77,9 +116,6 @@ function loadEntityBase(){
             entyBaseQuery
                 .on('error', function(err) {
                     console.log(err);
-                })
-                .on('fields', function(fields) {
-                    // the field packets for the rows to follow
                 })
                 .on('result', function(row) {
                     // Pausing the connnection is useful if your processing involves I/O
