@@ -21,7 +21,7 @@ var entyAccntHash = config.hash.entyAccntHash;
 
 
 
-async.series(
+async.series([
     function(callback){
         loadEntityBase(callback);
     },
@@ -31,7 +31,13 @@ async.series(
     function(callback){
         loadEntityElg(callback);
     }
-);
+],
+function(err, results){
+    // results is now equal to ['one', 'two']
+    if(!err){
+        console.log('all load finish');
+    }
+});
 
 // loadEntityBase();
 // loadEntityAccnt();
