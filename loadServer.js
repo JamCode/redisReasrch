@@ -1,6 +1,7 @@
 var redis = require("redis");
 var client = redis.createClient({auth_pass:'here_dev'});
 var config = require('./config');
+var async = require('async');
 
 client.on("error", function (err) {
     console.log("Error " + err);
@@ -17,12 +18,27 @@ connection.connect();
 
 var entyBaseHash = config.hash.entyBaseHash;
 var entyAccntHash = config.hash.entyAccntHash;
-loadEntityBase();
-loadEntityAccnt();
-loadEntityElg();
 
 
-function loadEntityElg(){
+
+async.series(
+    function(callback){
+        loadEntityBase(callback);
+    },
+    function(callback){
+        loadEntityAccnt(callback);
+    },
+    function(callback){
+        loadEntityElg(callback);
+    },
+);
+
+// loadEntityBase();
+// loadEntityAccnt();
+// loadEntityElg();
+
+
+function loadEntityElg(endCallback){
     console.log('start load entity elg');
     client.del(config.hash.entyElgHash, function(err, reply){
         if(err){
@@ -58,13 +74,14 @@ function loadEntityElg(){
                 })
                 .on('end', function() {
                     console.log('load entity elg end');
+                    endCallback(null);
                 }
             );
         }
     });
 }
 
-function loadEntityAccnt(){
+function loadEntityAccnt(endCallback){
     console.log('start load entity accnt');
     client.del(entyAccntHash, function(err, reply){
         if (err) {
@@ -100,13 +117,14 @@ function loadEntityAccnt(){
                 })
                 .on('end', function() {
                     console.log('load entity accnt end');
+                    endCallback(null);
                 }
             );
         }
     });
 }
 
-function loadEntityBase(){
+function loadEntityBase(endCallback){
     console.log('start load entity base');
     client.del(entyBaseHash, function(err, reply){
         if(err){
@@ -131,6 +149,7 @@ function loadEntityBase(){
                 })
                 .on('end', function() {
                     console.log('load entity base end');
+                    endCallback(null);
                 }
             );
         }
