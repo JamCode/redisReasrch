@@ -275,7 +275,7 @@ function loadEntityBase(endCallback){
                         if(err){
                             console.log(err);
                         }else{
-                            //console.log(row.EMA_ENTY_SRNO);
+                            console.log(row.EMA_ENTY_SRNO);
                         }
                         connection.resume();
                     });
