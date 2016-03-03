@@ -24,19 +24,19 @@ var entyAccntHash = config.hash.entyAccntHash;
 async.series([
     function(callback){
         loadEntityBase(callback);
-    },
-    function(callback){
-        loadEntityAccnt(callback);
-    },
-    function(callback){
-        loadEntityElg(callback);
-    },
-    function(callback){
-        loadEntityMktStatus(callback);
-    },
-    function(callback){
-        loadEntityMktMaking(callback);
     }
+    // function(callback){
+    //     loadEntityAccnt(callback);
+    // },
+    // function(callback){
+    //     loadEntityElg(callback);
+    // },
+    // function(callback){
+    //     loadEntityMktStatus(callback);
+    // },
+    // function(callback){
+    //     loadEntityMktMaking(callback);
+    // }
     // function(callback){
     //     loadUserDtls(callback);
     // }
