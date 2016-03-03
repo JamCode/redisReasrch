@@ -30,6 +30,9 @@ async.series([
     },
     function(callback){
         loadEntityElg(callback);
+    },
+    function(callback){
+        loadEntityMktStatus(callback);
     }
 ],
 function(err, results){
@@ -42,6 +45,49 @@ function(err, results){
 // loadEntityBase();
 // loadEntityAccnt();
 // loadEntityElg();
+
+function loadEntityMktStatus(endCallback){
+    console.log('start load entity mkt status');
+    client.del(config.hash.entyMktStatusHash, function(err, reply){
+        if(err){
+            console.log(err);
+        }else{
+            var query = connection.query('select *from trdx_entity_mkt_status_dtls where ems_enty_status_indc = 3');
+            query
+                .on('error', function(err) {
+                    console.log(err);
+                })
+                .on('result', function(row) {
+                    // Pausing the connnection is useful if your processing involves I/O
+                    connection.pause();
+                    client.hget(config.hash.entyMktStatusHash, row.EMS_ENTY_SRNO, function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            var arr = JSON.parse(reply);
+                            if(arr == null){
+                                arr = [];
+                            }
+                            arr.push(row);
+                            client.hset(config.hash.entyMktStatusHash, row.EMS_ENTY_SRNO, JSON.stringify(arr), function(err, reply){
+                                if(err){
+                                    console.log(err);
+                                }else{
+
+                                }
+                                connection.resume();
+                            });
+                        }
+                    });
+                })
+                .on('end', function() {
+                    console.log('load entity mkt status end');
+                    endCallback(null);
+                }
+            );
+        }
+    });
+}
 
 
 function loadEntityElg(endCallback){
