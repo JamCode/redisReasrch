@@ -17,9 +17,6 @@ async.series([
     },
     function(callback){
         loadOper.loadEntityMktMaking(callback);
-    },
-    function(callback){
-        loadOper.loadUserDtls(callback);
     }
 ],
 function(err, results){
