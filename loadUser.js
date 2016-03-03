@@ -11,5 +11,6 @@ function(err, results){
     // results is now equal to ['one', 'two']
     if(!err){
         console.log('all load finish');
+        process.exit(0);
     }
 });
