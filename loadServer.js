@@ -36,7 +36,7 @@ async.series([
     },
     function(callback){
         loadEntityMktMaking(callback);
-    }
+    },
     function(callback){
         loadUserDtls(callback);
     }
