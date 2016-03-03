@@ -30,7 +30,7 @@ async.series(
     },
     function(callback){
         loadEntityElg(callback);
-    },
+    }
 );
 
 // loadEntityBase();
