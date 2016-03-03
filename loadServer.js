@@ -33,6 +33,9 @@ async.series([
     },
     function(callback){
         loadEntityMktStatus(callback);
+    },
+    function(callback){
+        loadEntityMktMaking(callback);
     }
 ],
 function(err, results){
@@ -45,6 +48,49 @@ function(err, results){
 // loadEntityBase();
 // loadEntityAccnt();
 // loadEntityElg();
+
+function loadEntityMktMaking(endCallback){
+    console.log('start load entity mkt making dtls');
+    client.del(config.hash.entyMktMakeHash, function(err, reply){
+        if(err){
+            console.log(err);
+        }else{
+            var query = connection.query('select *from trdx_entity_mkt_making_dtls');
+            query
+                .on('error', function(err) {
+                    console.log(err);
+                })
+                .on('result', function(row) {
+                    // Pausing the connnection is useful if your processing involves I/O
+                    connection.pause();
+                    client.hget(config.hash.entyMktMakeHash, row.EMM_ENTY_SRNO, function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            var arr = JSON.parse(reply);
+                            if(arr == null){
+                                arr = [];
+                            }
+                            arr.push(row);
+                            client.hset(config.hash.entyMktMakeHash, row.EMM_ENTY_SRNO, JSON.stringify(arr), function(err, reply){
+                                if(err){
+                                    console.log(err);
+                                }else{
+
+                                }
+                                connection.resume();
+                            });
+                        }
+                    });
+                })
+                .on('end', function() {
+                    console.log('load entity mkt making dtls end');
+                    endCallback(null);
+                }
+            );
+        }
+    });
+}
 
 function loadEntityMktStatus(endCallback){
     console.log('start load entity mkt status');
