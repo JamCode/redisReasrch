@@ -18,17 +18,20 @@ client.hkeys(entyBaseHash, function(err, reply){
     }else{
         console.log(reply.length);
         entySrnoArr = reply;
-        var milSec = 250;
+        var milSec = 1000;
         setInterval(function(){
-            var packCount = 5000;
+            var packCount = 1;
 
             console.log('send '+ packCount*1000/milSec + 'req/s for enty base info');
             for(var i = 0; i<packCount; ++i){
                 var index = parseInt(Math.random()*entySrnoArr.length, 10);
+                var nowtime = Date.now();
                 client.hget(entyBaseHash, entySrnoArr[index], function(err, reply){
                     if(err){
                         console.log(err);
                     }
+                    var finishtime = Date.now();
+                    console.log('cost: ' + finishtime - nowtime);
                 });
             }
 
