@@ -2,6 +2,7 @@ var operation = require('./database/operation.js');
 var redis = require("redis");
 var client = redis.createClient({auth_pass:'here_dev'});
 var config = require('./config');
+var async = require('async');
 
 client.on("error", function (err) {
     console.log("Error " + err);
@@ -20,24 +21,27 @@ client.hkeys(entyBaseHash, function(err, reply){
         entySrnoArr = reply;
         var milSec = 1000;
         setInterval(function(){
-            var packCount = 1;
+            var packCount = 10;
 
             console.log('send '+ packCount*1000/milSec + 'req/s for enty base info');
+            var entyArr = [];
+
             for(var i = 0; i<packCount; ++i){
                 var index = parseInt(Math.random()*entySrnoArr.length, 10);
-                var nowtime = Date.now();
-                client.hget(entyBaseHash, entySrnoArr[index], function(err, reply){
+                entyArr.push(entySrnoArr[index]);
+            }
+            var nowtime = Date.now();
+            async.eachSeries(entyArr, function(item, callback){
+                client.hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
                     }
-                    var finishtime = Date.now();
-                    console.log('cost: ' + (finishtime - nowtime));
-                    if (reply!=null) {
-                        console.log(reply);
-                    }
+                    callback(null);
                 });
-            }
-
+            }, function(){
+                var finishtime = Date.now();
+                console.log('done with cost: '+ (finishtime - nowtime));
+            });
         }, milSec);
     }
 });
