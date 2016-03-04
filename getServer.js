@@ -1,6 +1,6 @@
 var operation = require('./database/operation.js');
 var redis = require("redis");
-var client = redis.createClient({auth_pass:'here_dev'});
+var client = redis.createClient({auth_pass:'here_dev', host:'10.116.0.165'});
 var config = require('./config');
 var async = require('async');
 
