@@ -31,7 +31,7 @@ client.hkeys(entyBaseHash, function(err, reply){
                         console.log(err);
                     }
                     var finishtime = Date.now();
-                    console.log('cost: ' + finishtime - nowtime);
+                    console.log('cost: ' + (finishtime - nowtime));
                 });
             }
 
