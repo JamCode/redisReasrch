@@ -32,6 +32,9 @@ client.hkeys(entyBaseHash, function(err, reply){
                     }
                     var finishtime = Date.now();
                     console.log('cost: ' + (finishtime - nowtime));
+                    if (reply!=null) {
+                        console.log(reply);
+                    }
                 });
             }
 
