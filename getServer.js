@@ -21,7 +21,7 @@ client.hkeys(entyBaseHash, function(err, reply){
         entySrnoArr = reply;
         var milSec = 1000;
         setInterval(function(){
-            var packCount = 1000;
+            var packCount = 10000;
 
             console.log('send '+ packCount*1000/milSec + 'req/s for enty base info');
             var entyArr = [];
