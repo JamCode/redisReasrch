@@ -31,7 +31,7 @@ client.hkeys(entyBaseHash, function(err, reply){
                 entyArr.push(entySrnoArr[index]);
             }
             var nowtime = Date.now();
-            async.eachSeries(entyArr, function(item, callback){
+            async.each(entyArr, function(item, callback){
                 client.hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
