@@ -36,6 +36,7 @@ client.hkeys(entyBaseHash, function(err, reply){
                     if(err){
                         console.log(err);
                     }
+                    reply = JSON.parse(reply);
                     callback(null);
                 });
             }, function(){
