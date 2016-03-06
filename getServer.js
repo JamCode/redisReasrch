@@ -45,8 +45,8 @@ client.hkeys(entyBaseHash, function(err, reply){
             }
             var nowtime = Date.now();
             async.each(entyArr, function(item, callback){
-                var redisIndex = parseInt(Math.random()*redisArr.length, 10);
-                redisArr[redisIndex].hget(entyBaseHash, item, function(err, reply){
+                //var redisIndex = parseInt(Math.random()*redisArr.length, 10);
+                redisArr[0].hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
                     }
