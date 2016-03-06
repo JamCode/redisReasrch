@@ -14,10 +14,12 @@ redisArr.push(childClient);
 
 client.on("error", function (err) {
     console.log("Error master redis" + err);
+    redisArr.splice(0, 1);
 });
 
 childClient.on("error", function(err){
     console.log("Error child redis" + err);
+    redisArr.splice(1, 1);
 });
 
 
@@ -49,8 +51,8 @@ client.hkeys(entyBaseHash, function(err, reply){
             }
             var nowtime = Date.now();
             async.each(entyArr, function(item, callback){
-                //var redisIndex = parseInt(Math.random()*redisArr.length, 10);
-                redisArr[0].hget(entyBaseHash, item, function(err, reply){
+                var redisIndex = parseInt(Math.random()*redisArr.length, 10);
+                redisArr[redisIndex].hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
                     }
