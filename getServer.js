@@ -26,15 +26,19 @@ var entyAccntHash = config.hash.entyAccntHash;
 
 var entySrnoArr;
 
+function getBytesLength(str) {
+    return str.replace(/[^\x00-\xff]/gi, "--").length;
+}
+
 client.hkeys(entyBaseHash, function(err, reply){
     if(err){
         console.log(err);
     }else{
         console.log(reply.length);
         entySrnoArr = reply;
-        var milSec = 2000;
+        var milSec = 1000;
         setInterval(function(){
-            var packCount = 20000;
+            var packCount = 10000;
 
             console.log('send '+ packCount*1000/milSec + 'req/s for enty base info');
             var entyArr = [];
@@ -45,11 +49,12 @@ client.hkeys(entyBaseHash, function(err, reply){
             }
             var nowtime = Date.now();
             async.each(entyArr, function(item, callback){
-                //var redisIndex = parseInt(Math.random()*redisArr.length, 10);
-                redisArr[0].hget(entyBaseHash, item, function(err, reply){
+                var redisIndex = parseInt(Math.random()*redisArr.length, 10);
+                redisArr[redisIndex].hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
                     }
+                    console.log(getBytesLength(reply.length));
                     reply = JSON.parse(reply);
                     callback(null);
                 });

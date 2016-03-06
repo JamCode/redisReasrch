@@ -10,3 +10,10 @@ console.log(Object.keys(a).length);
 for (var variable in a) {
     console.log(variable+" "+ a[variable]);
 }
+
+function getBytesLength(str) {
+    return str.replace(/[^\x00-\xff]/gi, "--").length;
+}
+
+var str = 'ssssddd我我我是';
+console.log(getBytesLength(str));
