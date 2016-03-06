@@ -15,11 +15,13 @@ redisArr.push(childClient);
 client.on("error", function (err) {
     console.log("Error master redis" + err);
     redisArr.splice(0, 1);
+    client.end();
 });
 
 childClient.on("error", function(err){
-    console.log("Error child redis" + err);
+    console.log("Error child redis " + err);
     redisArr.splice(1, 1);
+    childClient.end();
 });
 
 
