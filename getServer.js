@@ -1,12 +1,25 @@
 var operation = require('./database/operation.js');
 var redis = require("redis");
 var client = redis.createClient({auth_pass:'here_dev'});
+var childClient = redis.createClient({port:6378});
+
 var config = require('./config');
 var async = require('async');
 
+var redisArr = [];
+redisArr.push(client);
+redisArr.push(childClient);
+
+
+
 client.on("error", function (err) {
-    console.log("Error " + err);
+    console.log("Error master redis" + err);
 });
+
+childClient.on("error", function(err){
+    console.log("Error child redis" + err);
+});
+
 
 var entyBaseHash = config.hash.entyBaseHash;
 var entyAccntHash = config.hash.entyAccntHash;
@@ -32,7 +45,8 @@ client.hkeys(entyBaseHash, function(err, reply){
             }
             var nowtime = Date.now();
             async.each(entyArr, function(item, callback){
-                client.hget(entyBaseHash, item, function(err, reply){
+                var redisIndex = parseInt(Math.random()*redisArr.length, 10);
+                redisArr[redisIndex].hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
                     }
