@@ -54,7 +54,7 @@ client.hkeys(entyBaseHash, function(err, reply){
                     if(err){
                         console.log(err);
                     }
-                    console.log(getBytesLength(reply.length));
+                    console.log(getBytesLength(reply));
                     reply = JSON.parse(reply);
                     callback(null);
                 });
