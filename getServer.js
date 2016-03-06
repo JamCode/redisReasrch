@@ -44,7 +44,6 @@ client.hkeys(entyBaseHash, function(err, reply){
         setInterval(function(){
             var packCount = 10000;
 
-            console.log('send '+ packCount*1000/milSec + 'req/s for enty base info');
             var entyArr = [];
 
             for(var i = 0; i<packCount; ++i){
@@ -52,8 +51,11 @@ client.hkeys(entyBaseHash, function(err, reply){
                 entyArr.push(entySrnoArr[index]);
             }
             var nowtime = Date.now();
+            var redisIndex = parseInt(Math.random()*redisArr.length, 10);
+
+            console.log('send '+ packCount*1000/milSec + 'req/s  to redis:'+redisIndex+' for enty base info');
             async.each(entyArr, function(item, callback){
-                var redisIndex = parseInt(Math.random()*redisArr.length, 10);
+
                 redisArr[redisIndex].hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
