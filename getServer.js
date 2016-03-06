@@ -56,7 +56,7 @@ client.hkeys(entyBaseHash, function(err, reply){
             console.log('send '+ packCount*1000/milSec + 'req/s  to redis:'+redisIndex+' for enty base info');
             async.each(entyArr, function(item, callback){
 
-                redisArr[redisIndex].hget(entyBaseHash, item, function(err, reply){
+                redisArr[1].hget(entyBaseHash, item, function(err, reply){
                     if(err){
                         console.log(err);
                     }
