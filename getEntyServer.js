@@ -69,7 +69,7 @@ function sendPackage(count, entySrnoArr, startTime){
         var finishtime = Date.now();
         console.log(totalPackages+' done with cost: '+ (finishtime - startTime));
         if(totalPackages == 0){
-            console.log(unitpackages' for one time '+', total is ' + args[2]);
+            console.log(unitpackages + ' for one time '+', total is ' + args[2]);
         }
         sendPackage(unitpackages, entySrnoArr, startTime);
     });
