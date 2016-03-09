@@ -77,6 +77,11 @@ function sendPackage(count, entySrnoArr, startTime){
                 if(err){
                     console.log(err);
                 }
+                
+                if(rows.length>0){
+                    console.log(rows[0].EMA_ENTY_SRNO);
+                }
+
                 connection.release();
                 callback(null);
             });
