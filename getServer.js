@@ -52,7 +52,7 @@ function sendPackage(count, entySrnoArr, startTime){
     }
 
     async.each(entyArr, function(item, callback){
-        redisArr[0].hget(entyBaseHash, item, function(err, reply){
+        redisArr[0].hget(config.hash.entyBaseHash, item, function(err, reply){
             if(err){
                 console.log(err);
             }
