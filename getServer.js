@@ -73,6 +73,6 @@ client.hkeys(config.hash.entyBaseHash, function(err, reply){
         console.log(reply.length);
         entySrnoArr = reply;
         var startTime = Date.now();
-        sendPackage(1000, entySrnoArr, startTime);
+        sendPackage(100, entySrnoArr, startTime);
     }
 });
