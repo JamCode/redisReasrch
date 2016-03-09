@@ -28,6 +28,7 @@ client.on("error", function (err) {
 
 var entySrnoArr;
 var totalPackages = 10000;
+var unitpackages = 100;
 
 function getBytesLength(str) {
     return str.replace(/[^\x00-\xff]/gi, "--").length;
@@ -61,7 +62,7 @@ function sendPackage(count, entySrnoArr, startTime){
     }, function(){
         var finishtime = Date.now();
         console.log(totalPackages+' done with cost: '+ (finishtime - startTime));
-        sendPackage(1000, entySrnoArr, startTime);
+        sendPackage(unitpackages, entySrnoArr, startTime);
     });
 }
 
@@ -73,6 +74,6 @@ client.hkeys(config.hash.entyBaseHash, function(err, reply){
         console.log(reply.length);
         entySrnoArr = reply;
         var startTime = Date.now();
-        sendPackage(100, entySrnoArr, startTime);
+        sendPackage(unitpackages, entySrnoArr, startTime);
     }
 });
