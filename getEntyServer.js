@@ -25,10 +25,16 @@ client.on("error", function (err) {
 // });
 
 
+var args = process.argv;
 
 var entySrnoArr;
-var totalPackages = 10000;
-var unitpackages = 100;
+var totalPackages = args[2];
+var unitpackages = args[3];
+
+if(unitpackages == null||totalPackages == null){
+    console.log('need totalPackages and unitpackages');
+    exit(0);
+}
 
 function getBytesLength(str) {
     return str.replace(/[^\x00-\xff]/gi, "--").length;
@@ -62,6 +68,9 @@ function sendPackage(count, entySrnoArr, startTime){
     }, function(){
         var finishtime = Date.now();
         console.log(totalPackages+' done with cost: '+ (finishtime - startTime));
+        if(totalPackages == 0){
+            console.log(unitpackages' for one time '+', total is ' + args[2]);
+        }
         sendPackage(unitpackages, entySrnoArr, startTime);
     });
 }
