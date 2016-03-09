@@ -72,19 +72,24 @@ function sendPackage(count, entySrnoArr, startTime){
 
         pool.getConnection(function(err, connection) {
             // Use the connection
-            connection.query( 'SELECT * FROM trdx_entity_master where EMA_ENTY_SRNO = ?', [item], function(err, rows) {
-                // And done with the connection.
-                if(err){
-                    console.log(err);
-                }
-                
-                if(rows.length>0){
-                    console.log(rows[0].EMA_ENTY_SRNO);
-                }
-
-                connection.release();
+            if(err){
+                console.log(err);
                 callback(null);
-            });
+            }else{
+                connection.query( 'SELECT * FROM trdx_entity_master where EMA_ENTY_SRNO = ?', [item], function(err, rows) {
+                    // And done with the connection.
+                    if(err){
+                        console.log(err);
+                    }
+
+                    // if(rows.length>0){
+                    //     console.log(rows[0].EMA_ENTY_SRNO);
+                    // }
+
+                    connection.release();
+                    callback(null);
+                });
+            }
         });
     }, function(){
         var finishtime = Date.now();
