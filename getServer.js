@@ -66,7 +66,7 @@ function sendPackage(count, entySrnoArr, startTime){
 }
 
 
-client.hkeys(entyBaseHash, function(err, reply){
+client.hkeys(config.hash.entyBaseHash, function(err, reply){
     if(err){
         console.log(err);
     }else{
