@@ -61,7 +61,7 @@ function sendPackage(count, entySrnoArr, startTime){
     }, function(){
         var finishtime = Date.now();
         console.log(totalPackages+' done with cost: '+ (finishtime - startTime));
-        sendPackage(50, entySrnoArr, startTime);
+        sendPackage(1000, entySrnoArr, startTime);
     });
 }
 
@@ -73,6 +73,6 @@ client.hkeys(config.hash.entyBaseHash, function(err, reply){
         console.log(reply.length);
         entySrnoArr = reply;
         var startTime = Date.now();
-        sendPackage(50, entySrnoArr, startTime);
+        sendPackage(1000, entySrnoArr, startTime);
     }
 });
