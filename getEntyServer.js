@@ -33,7 +33,7 @@ var unitpackages = args[3];
 
 if(unitpackages == null||totalPackages == null){
     console.log('need totalPackages and unitpackages');
-    exit(0);
+    return;
 }
 
 function getBytesLength(str) {
