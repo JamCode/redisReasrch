@@ -6,7 +6,8 @@ exports.hash = {
     entyMktStatusHash: 'entyMktStatusHash',
     entyTypeDtlsHash: 'entyTypeDtlsHash',
 
-    userDtlsHash: 'userDtlsHash'
+    userDtlsHash: 'userDtlsHash',
+    assetDtlsHash: 'assetDtlsHash',
 }
 
 exports.set = {

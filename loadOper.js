@@ -16,6 +16,38 @@ var connection = mysql.createConnection({
 connection.connect();
 
 
+exports.loadAssetDtls = function(endCallback){
+    client.del(config.hash.assetDtlsHash, function(err, reply){
+        if(err){
+            console.log(err);
+        }else{
+            var query = connection.query('select *from trdx_asset_base_dtls');
+            query
+                .on('error', function(err) {
+                    console.log(err);
+                })
+                .on('result', function(row) {
+                    // Pausing the connnection is useful if your processing involves I/O
+                    connection.pause();
+                    client.hset(config.hash.assetDtlsHash, row.abd_asset_srno, JSON.stringify(row), function(err, reply){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            //console.log(row.EMA_ENTY_SRNO);
+                        }
+                        connection.resume();
+                    });
+                })
+                .on('end', function() {
+                    console.log('load asset dtls end');
+                    endCallback(null);
+                }
+            );
+        }
+    });
+}
+
+
 exports.loadUserDtls = function(endCallback){
     console.log('start load user dtls');
     client.del(config.hash.userDtlsHash, function(err, reply){
