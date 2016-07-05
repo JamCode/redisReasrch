@@ -30,7 +30,7 @@ app.use(express.static('fonts'));
 
 
 
-app.get('/', function(req, res) {
+app.get('/search', function(req, res) {
     console.log(req.query);
 
     if(req.query.entyDesc !== undefined){
