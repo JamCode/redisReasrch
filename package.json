@@ -19,6 +19,7 @@
   "homepage": "https://github.com/JamCode/redisReasrch#readme",
   "dependencies": {
     "async": "^1.5.2",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "hiredis": "^0.4.1",
     "mysql": "^2.10.2",
