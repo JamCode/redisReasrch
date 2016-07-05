@@ -52,7 +52,7 @@ function setAssetPrName(){
                 for(var i=0; i<reply.abd_asset_shrt_desc.length;++i){
                     for(var j=i;j<reply.abd_asset_shrt_desc.length;++j){
                         var listStr = reply.abd_asset_shrt_desc.substr(i, j-i+1);
-                        client1.lpush('asset.'+listStr, reply.abd_asset_shrt_desc, function(err){
+                        client1.lpush('asset.'+listStr, JSON.stringify({desc:reply.abd_asset_shrt_desc, assetSrno:reply.abd_asset_srno, assetCode:reply.abd_asset_encd_asset_code}), function(err){
                             if(err){
                                 console.log(err);
                             }else{
@@ -76,7 +76,7 @@ function setEntyPrName(){
                 for(var i=0; i<reply.EMA_ENTY_SHRT_DESC.length;++i){
                     for(var j=i;j<reply.EMA_ENTY_SHRT_DESC.length;++j){
                         var listStr = reply.EMA_ENTY_SHRT_DESC.substr(i, j-i+1);
-                        client1.lpush('enty.'+listStr, reply.EMA_ENTY_SHRT_DESC, function(err){
+                        client1.lpush('enty.'+listStr, JSON.stringify({desc:reply.EMA_ENTY_SHRT_DESC, entySrno:reply.EMA_ENTY_SRNO}), function(err){
                             if(err){
                                 console.log(err);
                             }else{
@@ -89,7 +89,7 @@ function setEntyPrName(){
                 if(reply.EMA_PNYN_CODE_SHRT_DESC !== null){
                     for(var i=0;i<reply.EMA_PNYN_CODE_SHRT_DESC.length;++i){
                         var listStr = reply.EMA_PNYN_CODE_SHRT_DESC.substr(0, i+1);
-                        client1.lpush('enty.'+listStr, reply.EMA_ENTY_SHRT_DESC, function(err){
+                        client1.lpush('enty.'+listStr, JSON.stringify({desc:reply.EMA_ENTY_SHRT_DESC, entySrno:reply.EMA_ENTY_SRNO}), function(err){
                             if(err){
                                 console.log(err);
                             }else{
