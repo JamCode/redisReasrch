@@ -7,6 +7,10 @@ var a = {
 
 console.log(Object.keys(a).length);
 
+a.forEach(function(e){
+    console.log(e);
+});
+
 for (var variable in a) {
     console.log(variable+" "+ a[variable]);
 }

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://v3.bootcss.com/examples/cover/ -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://v3.bootcss.com/favicon.ico">
+
+    <title>RMB</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+            <div class="cover-container">
+
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">本币demo</h3>
+                        <nav>
+                            <ul class="nav masthead-nav">
+                                <!-- <li class="active"><a href="http://v3.bootcss.com/examples/cover/#">Home</a></li>
+                                <li><a href="http://v3.bootcss.com/examples/cover/#">Features</a></li>
+                                <li><a href="http://v3.bootcss.com/examples/cover/#">Contact</a></li> -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="inner cover">
+                    <h1 class="cover-heading">报价补全demo</h1>
+                    <p class="lead">后端请求，补全机构名称和债券名称，补全所有机构下交易员名称</p>
+                    <p class="lead">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+                            报价
+                        </button>
+                        <!-- Modal -->
+
+                        <div class="modal fade modal-style" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h3 id="myModalLabel">报价表单</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">对手方</label>
+                                                <div class="col-sm-8">
+                                                    <input style="width:365px;" type="text" class="form-control" placeholder="对手方机构" id='entityName'>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastname" class="col-sm-3 control-label">交易员</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control"><option></option></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="firstname" class="col-sm-3 control-label">债券代码</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="firstname"
+                                                    placeholder="债券代码">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="firstname" class="col-sm-3 control-label">债券名称</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="firstname"
+                                                    placeholder="债券名称">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastname" class="col-sm-3 control-label">清算速度</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control">
+                                                        <option>T+0</option>
+                                                        <option>T+1</option>
+                                                        <option>T+2</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="firstname" class="col-sm-3 control-label">净价(元)</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="firstname"
+                                                    placeholder="净价">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="firstname" class="col-sm-3 control-label">到期收益率(%)</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="firstname"
+                                                    placeholder="到期收益率">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="firstname" class="col-sm-3 control-label">券面总额(万元)</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="firstname"
+                                                    placeholder="券面总额">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastname" class="col-sm-3 control-label">结算方式</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control">
+                                                        <option>券款对付</option>
+                                                        <option>先款后券</option>
+                                                        <option>先券后款</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastname" class="col-sm-3 control-label">清算类型</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control">
+                                                        <option>全额清算</option>
+                                                        <option>净额清算</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lastname" class="col-sm-3 control-label">买卖方向</label>
+                                                <div class="col-sm-8">
+                                                    <label class="radio">
+                                                        <input type="radio" value="买入" name="buysellgroup" checked="checked">
+                                                        买入
+                                                    </label>
+                                                    <label class="radio">
+                                                        <input type="radio" value="卖出" name="buysellgroup">
+                                                        卖出
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="jquery.min.js"></script>
+        <script src="bootstrap.min.js"></script>
+        <script src="typeahead.js"></script>
+        <script src="typeahead.bundle.js"></script>
+        <script src="typeahead.bundle.min.js"></script>
+        <script src="typeahead.jquery.js"></script>
+        <script src="typeahead.jquery.min.js"></script>
+
+        <script>
+        $('#entityName').typeahead({
+            minLength: 1,
+            highlight: true
+        },
+        {
+            name: 'my-dataset',
+            source: ['wang', 'www', 'wh']
+        });
+        </script>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    </body>
+</html>

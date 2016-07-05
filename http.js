@@ -20,6 +20,16 @@ client.select(1, function(err){
     }
 });
 
+
+app.use(express.static('./'));
+app.use(express.static('css'));
+app.use(express.static('js'));
+app.use(express.static('fonts'));
+
+
+
+
+
 app.get('/', function(req, res) {
     console.log(req.query);
 

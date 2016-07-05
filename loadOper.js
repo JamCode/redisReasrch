@@ -253,6 +253,8 @@ exports.loadEntityAccnt = function(endCallback){
     });
 }
 
+
+
 exports.loadEntityBase = function(endCallback){
     console.log('start load entity base');
     client.del(config.hash.entyBaseHash, function(err, reply){
