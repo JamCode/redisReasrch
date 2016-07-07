@@ -30,7 +30,7 @@ app.use(express.static('fonts'));
 
 var mysql = require('mysql');
 var pool  = mysql.createPool({
-  connectionLimit : 10,
+  connectionLimit : 30,
   host            : 'rdsruiaj3v2uaiv.mysql.rds.aliyuncs.com',
   user            : 'wanghan',
   password        : 'wanghan',
