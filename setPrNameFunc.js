@@ -12,7 +12,7 @@ client1.select(1, function(err){
     }
 });
 
-function setEntyUserRelation(){
+exports.setEntyUserRelation = function(){
     console.log('setEntyUserRelation');
     client.hgetall(config.hash.userDtlsHash, function(err, reply){
         if(err){
@@ -33,7 +33,7 @@ function setEntyUserRelation(){
 }
 
 
-function setAssetPrName(){
+exports.setAssetPrName = function(){
     client.hkeys('assetDtlsHash', function(err, reply){
         reply.forEach(function(key){
             client.hget('assetDtlsHash', key, function(err, reply){
@@ -56,7 +56,7 @@ function setAssetPrName(){
     });
 }
 
-function setEntyPrName(){
+exports.setEntyPrName = function(){
     client.hkeys('entyBaseHash', function(err, reply){
         reply.forEach(function(key){
             console.log(key);
