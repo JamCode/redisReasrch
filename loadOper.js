@@ -15,7 +15,6 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-
 exports.loadAssetDtls = function(endCallback){
     client.del(config.hash.assetDtlsHash, function(err, reply){
         if(err){

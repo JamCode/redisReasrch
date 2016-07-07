@@ -28,7 +28,14 @@ app.use(express.static('css'));
 app.use(express.static('js'));
 app.use(express.static('fonts'));
 
-
+var mysql = require('mysql');
+var pool  = mysql.createPool({
+  connectionLimit : 10,
+  host            : 'rdsruiaj3v2uaiv.mysql.rds.aliyuncs.com',
+  user            : 'wanghan',
+  password        : 'wanghan',
+  database        : 'cfets_test'
+});
 
 app.get('/entyUser', function(req, res){
     if(req.query.entySrno !== undefined){
@@ -64,6 +71,25 @@ app.get('/entyUser', function(req, res){
     }
 });
 
+
+app.get('/searchDatabase', function(req, res){
+    pool.getConnection(function(err, connection) {
+        // Use the connection
+        if(err){
+            console.log(err);
+        }else{
+            connection.query( 'SELECT EMA_ENTY_SHRT_DESC, EMA_ENTY_SRNO FROM trdx_entity_master limit 10', function(err, rows) {
+                if(err){
+                    console.log(err);
+                }else{
+                    res.send(rows);
+                }
+                connection.release();
+            });
+        }
+        // Don't use the connection here, it has been returned to the pool.
+    });
+});
 
 app.get('/search', function(req, res) {
     console.log(req.query);
