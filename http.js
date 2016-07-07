@@ -71,14 +71,17 @@ app.get('/entyUser', function(req, res){
     }
 });
 
+var entyDesc = ['中', '工', '农', '电', '建', '融', '信', '金', '银', '交', '基'];
 
 app.get('/searchDatabase', function(req, res){
     pool.getConnection(function(err, connection) {
         // Use the connection
+        var desc =  entyDesc[parseInt(Math.random()*entyDesc.length)];
+        console.log('search '+desc);
         if(err){
             console.log(err);
         }else{
-            connection.query( 'SELECT EMA_ENTY_SHRT_DESC, EMA_ENTY_SRNO FROM trdx_entity_master where EMA_ENTY_SHRT_DESC like \'%'+req.query.entyDesc+'%\' limit 10', function(err, rows) {
+            connection.query( 'SELECT EMA_ENTY_SHRT_DESC, EMA_ENTY_SRNO FROM trdx_entity_master where EMA_ENTY_SHRT_DESC like \'%'+desc+'%\' limit 10', function(err, rows) {
                 if(err){
                     console.log(err);
                 }else{
