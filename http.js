@@ -78,7 +78,7 @@ app.get('/searchDatabase', function(req, res){
         if(err){
             console.log(err);
         }else{
-            connection.query( 'SELECT EMA_ENTY_SHRT_DESC, EMA_ENTY_SRNO FROM trdx_entity_master limit 10', function(err, rows) {
+            connection.query( 'SELECT EMA_ENTY_SHRT_DESC, EMA_ENTY_SRNO FROM trdx_entity_master where EMA_ENTY_SHRT_DESC like \'%'+req.query.entyDesc+'%\' limit 10', function(err, rows) {
                 if(err){
                     console.log(err);
                 }else{
