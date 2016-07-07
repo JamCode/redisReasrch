@@ -4,23 +4,13 @@ var client1 = redis.createClient({auth_pass:'here_dev'});
 var config = require('./config');
 var async = require('async');
 
-
 client1.select(1, function(err){
     if(err){
         console.log(err);
     }else{
-        client1.send_command('flushdb', undefined, function(err){
-            if(err){
-                console.log(err);
-            }else{
-                setEntyPrName();
-                setAssetPrName();
-                setEntyUserRelation();
-            }
-        });
+
     }
 });
-
 
 function setEntyUserRelation(){
     console.log('setEntyUserRelation');
